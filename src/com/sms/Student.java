@@ -30,7 +30,7 @@ public class Student {
     	{
     		return name;
     	}
-    	public Double getMarks()
+    	public double getMarks()
     	{
     		return marks;
     	}

@@ -1,72 +1,136 @@
 package com.sms;
-import java.util.ArrayList;
+import java.io.EOFException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 public class StudentService {
 	
-		ArrayList<Student> students=new ArrayList<>();
 		
 		 public void addStudent(Student student)
 		{ 
 			 
-			for(Student s:students)
-		 {
-				 if(s.getrollNo()==student.getrollNo())
-				 {
-					 System.out.println("Student Id ALREADY EXISTS");
-				 }
-		 }
-		 students.add(student);
-		 System.out.println("Successfully added the elements");
+			String sql="insert into student values(?,?,?)";
+			try (
+				Connection con=DBConnection.getConnection();
+				PreparedStatement ps=con.prepareStatement(sql);
+				)
+			{
+				ps.setInt(1,student.getrollNo());
+				ps.setString(2,student.getName());
+				ps.setDouble(3,student.getMarks());
+				int rows=ps.executeUpdate();
+				if(rows>0)
+				{
+					System.out.println("Student Added Successfully");
+				}
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
 		}
-		 public void  viewStudent()
+		 
+		public void  viewStudent()
 		 {
-			 if(students.isEmpty())
-			 {
-				 System.out.println("No student found.");
-				 return;
-			 }
-			 for(Student student:students)
-			 {
-				 System.out.println(student);
-			 }
+			String sql="select * from student";
+			try(
+					Connection con=DBConnection.getConnection();
+					PreparedStatement ps=con.prepareStatement(sql);
+					ResultSet rs=ps.executeQuery(sql);
+					)
+			{
+				while(rs.next())
+				{
+					System.out.println(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getDouble(3));
+				}
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
 		 }
         public void searchStudent(int rollNo)
         
         {
-        	for(Student student:students)
+        	String sql="select * from student where rollno=?";
+        	try(
+					Connection con=DBConnection.getConnection();
+					PreparedStatement ps=con.prepareStatement(sql);
+					)
         	{
-        		if(student.getrollNo()== rollNo)
+        	
+        		ps.setInt(1,rollNo);
+        		
+        		ResultSet rs=ps.executeQuery();
+        		if(rs.next())
         		{
-        			System.out.println(student);
-        			return;
+        			System.out.println(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getDouble(3));
         		}
+        		else
+        		{
+        			System.out.println("student not found");
+        		}
+        		
         	}
-        	System.out.println("student not found");
+        	catch(Exception e)
+        	{
+        		e.printStackTrace();
+        	}
+        	
         }
         public void deleteStudent(int rollno)
         {
-        	for(Student student:students)
+        	String sql ="delete from student where rollno=?";
+        	try(
+					Connection con=DBConnection.getConnection();
+					PreparedStatement ps=con.prepareStatement(sql);
+					)
         	{
-        		if(student.getrollNo()==rollno)
+        		ps.setInt(1, rollno);
+        		int rows=ps.executeUpdate();
+        		if(rows>0)
         		{
-        			students.remove(student);
-        			System.out.println("successfully removed values");
-        			return ;
+        			System.out.println("student deleted");
         		}
-        		System.out.println("student not found");
-        		
+        		else
+        		{
+        			System.out.println("student not found");
+        		}
         	}
+        	catch(Exception e)
+        	{
+        		e.printStackTrace();
+        	}
+        	
+        	
         }
         public void updateMarks(int rollno1,double newMarks)
         {
-        	for(Student student:students)
+        	String sql="update student set marks=? where rollno=?";
+        	try(
+					Connection con=DBConnection.getConnection();
+					PreparedStatement ps=con.prepareStatement(sql);
+					)
         	{
-        		if(student.getrollNo()==rollno1)
+        		ps.setDouble(1,newMarks);
+        		ps.setInt(2,rollno1);
+        		int rows=ps.executeUpdate();
+        		if(rows>0)
         		{
-        			student.setMarks(newMarks);
-        			System.out.println("successfully updated successfully");
-        			return ;
+        		System.out.println(rows+"succesfully");
+        		}
+        		else
+        		{
+        			System.out.println("student not found");
         		}
         	}
-        	System.out.println("student not found");
+        	catch(Exception e)
+        	{
+        		e.printStackTrace();
+        	}
+        	
+        	
         }
 }
