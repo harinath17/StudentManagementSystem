@@ -34,20 +34,20 @@ public class Main {
 				break;
 			case 3:
 				System.out.println("Enter id to search:");
-				int rollno=sc.nextInt();
-				service.searchStudent(rollno);
+				int searchrollno=sc.nextInt();
+				service.searchStudent(searchrollno);
 				break;
 			case 4:
 				System.out.println("Enter id to delete");
-				int rollno1=sc.nextInt();
-				service.deleteStudent(rollno1);
+				int deleterollno=sc.nextInt();
+				service.deleteStudent(deleterollno);
 				break;
 			case 5:
 				System.out.println("Enter id:");
-				int rollno11=sc.nextInt();
+				int updaterollno=sc.nextInt();
 				System.out.println("Enter new marks:");
 				double newMarks=sc.nextDouble();
-				service.updateMarks(rollno11, newMarks);
+				service.updateMarks(updaterollno, newMarks);
 				break;
 			case 6:
 				System.out.println("Exitsing....");
