@@ -1,4 +1,4 @@
-package com.sms;
+package com.studentmanagement;
 import java.util.*;
 public class Student {
 	   private int rollno;

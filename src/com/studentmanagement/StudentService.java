@@ -1,9 +1,8 @@
-package com.sms;
+package com.studentmanagement;
 import java.io.EOFException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
+import java.sql.*;
 public class StudentService {
 	//middle layer-1
 	//-> validation & business logic 

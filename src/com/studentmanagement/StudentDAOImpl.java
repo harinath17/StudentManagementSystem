@@ -1,10 +1,11 @@
-package com.sms;
+package com.studentmanagement;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
-public class StudentDAOImpl implements StudentDAO{
+
+public class StudentDAOImpl implements StudentDAO
+{
 	//database logic (sql) 
 	//middle layer -3
 			public void addStudent(Student student)
@@ -14,7 +15,8 @@ public class StudentDAOImpl implements StudentDAO{
 				String checksql="select * from student where rollno=?";
 				try (
 						Connection con=DBConnection.getConnection();)
-				{		PreparedStatement checkps=con.prepareStatement(checksql);
+				{		
+					PreparedStatement checkps=con.prepareStatement(checksql);
 						checkps.setInt(1,student.getrollNo());
 						ResultSet rs=checkps.executeQuery();
 					if(rs.next())
@@ -143,5 +145,6 @@ public class StudentDAOImpl implements StudentDAO{
 			{
 				e.printStackTrace();
 			}
-		}	
+		}
+
 }

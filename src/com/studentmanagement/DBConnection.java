@@ -1,4 +1,4 @@
-package com.sms;
+package com.studentmanagement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 public class DBConnection {

@@ -1,11 +1,12 @@
-package com.sms;
+package com.studentmanagement;
+import java.util.Scanner.*;
 import java.util.*;
+
 public class Main {
 	public static void main(String [] args)
 	{
 		Scanner sc=new Scanner(System.in);
 		StudentService service=new StudentService();
-	
 		while(true)
 		{
 			System.out.println("Student Management system:");

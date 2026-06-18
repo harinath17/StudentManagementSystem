@@ -1,4 +1,4 @@
-package com.sms;
+package com.studentmanagement;
 
 public interface StudentDAO {
 	//middle layer -2
