@@ -20,4 +20,14 @@ public interface StudentDAO {
 	
 	void deleteStudent(int rollNo);
 	
+	void searchStudentByName(String name);
+	
+	void countStudents();
+	
+	void averageStudents();
+	
+	void highestmarks();
+	
+	void marksinorder();
+	
 }

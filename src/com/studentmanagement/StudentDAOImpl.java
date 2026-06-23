@@ -47,7 +47,7 @@ public class StudentDAOImpl implements StudentDAO
 				try(
 						Connection con=DBConnection.getConnection();
 						PreparedStatement ps=con.prepareStatement(sql);
-						ResultSet rs=ps.executeQuery(sql);
+						ResultSet rs=ps.executeQuery();
 						)
 				{
 					while(rs.next())
@@ -145,6 +145,110 @@ public class StudentDAOImpl implements StudentDAO
 			{
 				e.printStackTrace();
 			}
+		}
+		public void searchStudentByName(String name)
+		{
+				String sql="select * from student where name like ?";
+				try(Connection con=DBConnection.getConnection();
+						PreparedStatement ps=con.prepareStatement(sql);
+						)
+				{
+					ps.setString(1,"%"+name+"%");
+					ResultSet rs=ps.executeQuery();
+					if(rs.next())
+					{
+						System.out.println(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getDouble(3));
+						return ;
+					}
+					else
+					{
+						System.out.println("student not found");
+						return;
+					}
+		
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}			
+		}
+		public void countStudents()
+		{
+			String sql="select count(*) from student";
+			try(Connection con=DBConnection.getConnection();
+					PreparedStatement ps=con.prepareStatement(sql);
+					ResultSet rs=ps.executeQuery();
+					)
+			{
+				if(rs.next())
+				{
+					System.out.println("Total Students:"+rs.getInt(1));
+				}
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		public void averageStudents()
+		{
+			String sql="Select avg(marks) from student";
+			try(Connection con=DBConnection.getConnection();
+					PreparedStatement ps=con.prepareStatement(sql);
+					ResultSet rs=ps.executeQuery();
+					)
+			{
+				if(rs.next())
+				{
+					System.out.println("average marks :"+rs.getDouble(1));
+				}
+				
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+		}
+		public void highestmarks()
+		{
+			String sql="Select * from student order by marks desc limit 1";
+			try(Connection con=DBConnection.getConnection();
+					PreparedStatement ps=con.prepareStatement(sql);
+					ResultSet rs=ps.executeQuery();
+					)
+			{
+				if(rs.next())
+				{
+					System.out.println(rs.getInt("rollno")+" "+rs.getString("name")+" "+rs.getInt("marks"));
+				}
+				
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+		}
+		public void marksinorder()
+		{
+			String sql="Select * from student order by marks desc";
+			try(Connection con=DBConnection.getConnection();
+					PreparedStatement ps=con.prepareStatement(sql);
+					ResultSet rs=ps.executeQuery();
+					)
+			{
+				while(rs.next())
+				{
+					System.out.println(rs.getInt("rollno")+" "+rs.getString("name")+" "+rs.getDouble("marks"));
+				}
+				
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
 		}
 
 }

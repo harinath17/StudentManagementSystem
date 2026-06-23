@@ -39,4 +39,24 @@ public class StudentService {
         {
         	dao.updateMarks(rollno1, newMarks);        	        	
         }
+        public void searchStudentByName(String name)
+        {
+        	dao.searchStudentByName(name);
+        }
+        public void countStudents()
+        {
+        	dao.countStudents();
+        }
+        public void averageStudents()
+        {
+        	dao.averageStudents();
+        }
+        public void highestmarks()
+        {
+        	dao.highestmarks();
+        }
+        public void marksinorder()
+        {
+        	dao.marksinorder();
+        }
 }
