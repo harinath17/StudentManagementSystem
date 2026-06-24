@@ -59,4 +59,16 @@ public class StudentService {
         {
         	dao.marksinorder();
         }
+        public void countPassedStudents()
+        {
+        	dao.countPassedStudents();
+        }
+        public void deleteAllStudents()
+        {
+        	dao.deleteAllStudents();
+        }
+       public void searchByMarksRange(double min,double max)
+       {
+    	   dao.searchByMarksRange(min,max);
+       }
 }

@@ -30,4 +30,10 @@ public interface StudentDAO {
 	
 	void marksinorder();
 	
+	void countPassedStudents();
+	
+	void deleteAllStudents();
+	
+	void searchByMarksRange(double min,double max);
+	
 }

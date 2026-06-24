@@ -250,5 +250,73 @@ public class StudentDAOImpl implements StudentDAO
 			}
 			
 		}
+		public void countPassedStudents()
+		{
+			String sql="select count(*) from student where marks >=35";
+			try(Connection con=DBConnection.getConnection();
+					PreparedStatement ps=con.prepareStatement(sql);
+					ResultSet rs=ps.executeQuery();
+					)
+			{
+				if(rs.next())
+				{
+					System.out.println("count is:"+rs.getInt(1));
+				}
+				
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		public void deleteAllStudents()
+		{
+			String sql="delete from student";
+			try(Connection con=DBConnection.getConnection();
+					PreparedStatement ps=con.prepareStatement(sql);
+					)
+			{
+				int rows=ps.executeUpdate();
+				if(rows>0)
+				{
+					System.out.println("successfully delete all student");
+				}
+				else
+				{
+					System.out.println("no students found");
+				}
+				
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		public void searchByMarksRange(double min,double max)
+		{
+			String sql="select * from student where marks between ? and ?";
+			try(Connection con=DBConnection.getConnection();
+					PreparedStatement ps=con.prepareStatement(sql);
+					)
+			{
+				ps.setDouble(1,min);
+				ps.setDouble(2,max);
+				ResultSet rs=ps.executeQuery();
+				boolean found=false;
+				while(rs.next())
+				{
+					found =true;
+					System.out.println(rs.getInt("rollno")+" "+rs.getString("name")+" "+rs.getDouble("marks"));
+				}
+				  if(!found)
+			        {
+			            System.out.println("Student not found");
+			        }
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
 
 }

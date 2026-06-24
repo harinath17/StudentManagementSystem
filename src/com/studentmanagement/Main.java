@@ -20,7 +20,10 @@ public class Main {
 			System.out.println("8-Average marks");
 			System.out.println("9-highest marks");
 			System.out.println("10-marks in desc order");
-			System.out.println("11-Exit");
+			System.out.println("11-countpassedStudent");
+			System.out.println("12-marksrange");
+			System.out.println("13-deleteAllStudents");
+			System.out.println("14-Exit");
 			System.out.println("entre choice:");
 			int choice=sc.nextInt();
 			switch(choice)
@@ -78,6 +81,19 @@ public class Main {
 				service.marksinorder();
 				break;
 			case 11:
+				service.countPassedStudents();
+				break;
+			case 12:
+				System.out.println("Enter Minimum Marks:");
+				double min=sc.nextDouble();
+				System.out.println("Enter Maximum Marks:");
+				double max=sc.nextDouble();
+				service.searchByMarksRange( min, max);
+				break;
+			case 13:
+				service.deleteAllStudents();
+				break;
+			case 14:
 				System.out.println("Exitsing....");
 				sc.close();
 				return;
